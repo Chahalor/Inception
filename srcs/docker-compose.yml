@@ -25,6 +25,7 @@ volumes:
   mariadb:
     driver: local
     driver_opts:
+      type: none
       device: /home/nduvoid/data/mariadb
   worldpress:
 
