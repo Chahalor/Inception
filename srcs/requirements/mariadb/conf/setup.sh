@@ -30,7 +30,7 @@ if [ ! -d "${DATADIR}/mysql" ]; then
 
 	echo "[MariaDB] Configuration SQL"
 
-# 	mysql << EOF
+# 	mysql << EOF # TODO: retry all commented lignes later (addapt them to the new env vars idiot)
 # CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 # CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 # GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
