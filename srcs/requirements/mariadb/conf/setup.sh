@@ -25,7 +25,7 @@ if [ ! -d "${DATADIR}/mysql" ]; then
 
 	echo "[MariaDB] Configuration SQL"
 
-	// TODO: setup the rigth DB
+	# TODO: setup the right DB
 	mysql << EOF
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';

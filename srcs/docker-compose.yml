@@ -3,6 +3,8 @@ services:
     build: ./requirements/mariadb
     volumes:
       - mariadb:/var/lib/mysql
+    env_file:
+      - .env
     networks:
       - inception
 
