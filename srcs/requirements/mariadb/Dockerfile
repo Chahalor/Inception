@@ -7,4 +7,4 @@ COPY conf/setup.sh /setup.sh
 RUN chmod -x /start.sh
 RUN chmod -x /setup.sh
 
-CMD [ "/setup.sh" ]
+ENTRYPOINT [ "/setup.sh" ]
