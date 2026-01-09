@@ -26,6 +26,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
+      o: bind
       device: /home/nduvoid/data/mariadb
   worldpress:
 
