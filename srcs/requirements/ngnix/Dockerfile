@@ -1,2 +1,2 @@
-FROM nginx:1.19-alpine
+FROM debian:12
 RUN apk update && apk add nano bash
