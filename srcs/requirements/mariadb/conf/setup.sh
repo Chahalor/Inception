@@ -28,15 +28,14 @@ if [ ! -d "${DATADIR}/mysql" ]; then
 	mysql << EOF
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 
 ALTER USER 'root'@'localhost'
-IDENTIFIED VIA mysql_native_password
-USING PASSWORD('${MYSQL_ROOT_PASSWORD}');
+IDENTIFIED WITH mysql_native_password BY '${MYSQL_ROOT_PASSWORD}';
 
 FLUSH PRIVILEGES;
 EOF
+
 
 	echo "[MariaDB] Arrêt du serveur temporaire"
 	mysqladmin shutdown
