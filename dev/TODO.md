@@ -32,17 +32,16 @@
 
 ## 🐳 3. Docker Compose
 
-* [X] Version `3.9`
 * [X] Définir **3 services obligatoires** :
   * [X] `nginx`
   * [X] `wordpress`
   * [X] `mariadb`
-* [ ] Utiliser **des images construites localement** (Dockerfile obligatoire)
-* [ ] Utiliser **un réseau Docker personnalisé**
-* [ ] Utiliser **des volumes persistants**
-* [ ] Ne pas utiliser `latest`
+* [X] Utiliser **des images construites localement** (Dockerfile obligatoire)
+* [X] Utiliser **un réseau Docker personnalisé**
+* [X] Utiliser **des volumes persistants**
+* [X] Ne pas utiliser `latest`
 * [ ] Aucun `container_name` en dur (optionnel mais recommandé)
-* [ ] Pas de `links`
+* [X] Pas de `links`
 
 ---
 
