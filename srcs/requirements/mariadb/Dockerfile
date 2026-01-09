@@ -1,10 +1,10 @@
-FROM debian:Bookworm
-WORKDIR /home/nduvoid
+FROM debian:bullseye
+RUN apt update && apt install mariadb-server mariadb-client
 
-# TODO: RUN rule
-RUN apt install mariadb
+COPY conf/start.sh /start.sh
+COPY conf/setup.sh /setup.sh
 
-COPY . .
-EXPOSE
+RUN chmod -x /start.sh
+RUN chmod -x /setup.sh
 
-CMD [ "sh" "./conf/setup.sh" ]
+CMD [ "/setup.sh" ]
