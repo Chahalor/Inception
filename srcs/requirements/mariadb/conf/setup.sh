@@ -36,7 +36,7 @@ IDENTIFIED WITH mysql_native_password BY '${MYSQL_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
 
-
+	echo "[DEBUG] SQL applied"	# rm
 	echo "[MariaDB] Arrêt du serveur temporaire"
 	mysqladmin shutdown
 fi
