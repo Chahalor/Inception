@@ -1,14 +1,3 @@
-# #!/bin/bash
-
-# set -e
-
-# if [ -d "/var/lib/mysql/mysql" ]; then
-# 	mariadb-install-db
-# fi
-
-# /start.sh
-
-
 #!/bin/sh
 
 set -e
