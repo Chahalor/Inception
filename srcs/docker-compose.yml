@@ -6,23 +6,23 @@ services:
     networks:
       - inception
 
-  ngnix:
-    build: ./requirements/ngnix
-    networks:
-      - inception
-    ports:
-      - "80:80"
+  # ngnix:
+  #   build: ./requirements/ngnix
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "80:80"
 
-  worldpress:
-    build: ./requirements/worldpress
-    volumes:
-      - /home/nduvoid/data:/worldpress
-    networks:
-      - inception
+  # worldpress:
+  #   build: ./requirements/worldpress
+  #   volumes:
+  #     - /home/nduvoid/data:/worldpress
+  #   networks:
+  #     - inception
 
 volumes:
   mariadb:
-  worldpress:
+  # worldpress:
 
 networks:
   inception:
