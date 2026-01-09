@@ -8,10 +8,10 @@ services:
     networks:
       - inception
 
-  worldpress:
-    build: ./requirements/worldpress
+  wordpress:
+    build: ./requirements/wordpress
     volumes:
-      - worldpress:/var/www/html
+      - wordpress:/var/www/html
     env_file:
       - .env
     networks:
@@ -29,7 +29,7 @@ services:
 
 volumes:
   mariadb:
-  worldpress:
+  wordpress:
 
 networks:
   inception:
