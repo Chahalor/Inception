@@ -48,12 +48,11 @@
 
 ## 🗄️ 4. MariaDB
 
-* [ ] Créer un Dockerfile basé sur `debian:bullseye`
-* [ ] Installer MariaDB **sans systemd**
-* [ ] Créer la base de données automatiquement
+* [X] Créer un Dockerfile basé sur `debian:bullseye`
+* [X] Installer MariaDB **sans systemd**
+* [X] Créer la base de données automatiquement
 * [ ] Créer l’utilisateur WordPress automatiquement
 * [ ] Sécuriser MariaDB :
-
   * [ ] mot de passe root
   * [ ] pas d’accès root distant
 * [ ] Utiliser un volume pour `/var/lib/mysql`

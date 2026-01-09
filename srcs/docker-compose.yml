@@ -2,16 +2,9 @@ services:
   mariadb:
     build: ./requirements/mariadb
     volumes:
-      - /home/nduvoid/data:/mariadb
+      - mariadb:/var/lib/mysql
     networks:
       - inception
-
-  # ngnix:
-  #   build: ./requirements/ngnix
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "80:80"
 
   # worldpress:
   #   build: ./requirements/worldpress
@@ -20,9 +13,20 @@ services:
   #   networks:
   #     - inception
 
+  # ngnix:
+  #   build: ./requirements/ngnix
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "80:80"
+
+
 volumes:
   mariadb:
-  # worldpress:
+    driver: local
+    driver_opts:
+      device: /home/nduvoid/data/mariadb
+  worldpress:
 
 networks:
   inception:
