@@ -10,7 +10,7 @@ mkdir -p ${DATADIR}
 chown -R mysql:mysql /run/mysqld
 chown -R mysql:mysql ${DATADIR}
 
-if [ ! -d "${DATADIR}/mysql" ]; then
+if [ ! -d "${DATADIR}" ]; then
 	echo "[MariaDB] Initialisation du data directory"
 
 	mysql_install_db \
