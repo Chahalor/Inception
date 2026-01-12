@@ -36,12 +36,19 @@ if [ ! -f "$INIT_FLAG" ]; then
 	fi
 
 	mysql <<-EOSQL
-		CREATE USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
-		CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+		-- Force password auth for root@localhost
+		ALTER USER 'root'@'localhost'
+		IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+
+		-- Ensure root can connect over the network
+		CREATE USER IF NOT EXISTS 'root'@'%'
+		IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+
 		GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 		GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
 		FLUSH PRIVILEGES;
-EOSQL
+	EOSQL
 
 	touch "$INIT_FLAG"
 	mysqladmin shutdown
