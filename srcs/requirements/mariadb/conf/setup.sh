@@ -51,7 +51,7 @@ if [ ! -f "$INIT_FLAG" ]; then
 	EOSQL
 
 	touch "$INIT_FLAG"
-	mysqladmin --user=mysql shutdown
+	mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 	wait "$pid"
 
 	echo "MariaDB initialization completed."
