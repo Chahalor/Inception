@@ -7,6 +7,8 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - inception
+    env_file:
+      - .env
 
   wordpress:
     container_name: wordpress
