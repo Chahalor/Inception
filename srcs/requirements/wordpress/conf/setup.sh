@@ -5,22 +5,14 @@ set -e
 WP_DIR="/var/www/html"
 
 echo "[WordPress] Waiting for MariaDB..."
-# echo "[DEBUG] while ! mysqladmin ping -h mariadb -u\"$MYSQL_USER\" -p\"$MYSQL_PASSWORD\" --silent; do"	# rm
-
-
 while ! mysqladmin ping \
-	-h "DB_HOST" \
+	-h "$DB_HOST" \
 	-u"$WP_USER" \
-	-p"$WP_USER_PASSWORD"; do
-	# --silent; do
+	-p"$WP_USER_PASSWORD"
+	--silent; do
 	sleep 1
 done
-
 echo "[WordPress] MariaDB is up"
-
-
-
-echo "[WordPress] MariaDB is available"
 
 if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	echo "[WordPress] Installing WordPress"
