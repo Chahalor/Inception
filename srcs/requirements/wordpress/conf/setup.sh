@@ -10,8 +10,8 @@ echo "[DEBUG] while ! mysqladmin ping -h mariadb -u\"$MYSQL_USER\" -p\"$MYSQL_PA
 while ! mysqladmin ping \
 	-h mariadb \
 	-u"$MYSQL_USER" \
-	-p"$MYSQL_PASSWORD" \
-	--silent
+	-p"$MYSQL_PASSWORD" #\
+	# --silent
 do
 	sleep 1
 done
