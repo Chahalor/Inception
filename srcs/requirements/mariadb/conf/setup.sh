@@ -56,7 +56,11 @@ fi
 # Lancement final
 # =========================
 echo "[MariaDB] Lancement final"
-exec mysqld --user=mysql --console
+exec mysqld \
+		--user=mysql \
+		--bind-address=0.0.0.0 \
+		--console
+
 
 
 
