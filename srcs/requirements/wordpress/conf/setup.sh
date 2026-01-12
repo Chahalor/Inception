@@ -25,4 +25,4 @@ fi
 chown -R www-data:www-data "$WP_DIR"
 
 echo "[WordPress] Starting PHP-FPM"
-exec php-fpm -F
+exec php-fpm8.2 -F
