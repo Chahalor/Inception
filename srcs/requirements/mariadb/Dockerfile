@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 # Empêche MariaDB de démarrer automatiquement
 RUN sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY setup.sh /setup.sh
+COPY conf/setup.sh /setup.sh
 RUN chmod +x /setup.sh
 
 EXPOSE 3306
