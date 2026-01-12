@@ -10,6 +10,8 @@ require_var() {
 	if [ -z "$1" ]; then
 		echo "[MariaDB] Error: required environment variable is missing"
 		exit 1
+	else
+		echo "'$1' is set"
 	fi
 }
 
