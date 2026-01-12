@@ -22,20 +22,27 @@ chown -R mysql:mysql "$RUN_DIR"
 echo "[MariaDB] Starting temporary server"
 mysqld_safe --skip-networking --socket="$SOCKET" &
 
-until mysqladmin --socket="$SOCKET" ping >/dev/null 2>&1; do
+# attendre le socket
+until mysqladmin --protocol=socket --socket="$SOCKET" ping >/dev/null 2>&1; do
 	sleep 1
 done
 
 echo "[MariaDB] Configuring database"
 
-mysql --protocol=socket -S "$SOCKET" -u root <<-SQL
+mysql \
+	--protocol=socket \
+	--socket="$SOCKET" \
+	-u root <<-SQL
 	CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 	CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 	GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 	FLUSH PRIVILEGES;
 SQL
 
-mysqladmin --socket="$SOCKET" -u root shutdown
+mysqladmin \
+	--protocol=socket \
+	--socket="$SOCKET" \
+	-u root shutdown
 
 echo "[MariaDB] Starting final server"
 exec mysqld \
