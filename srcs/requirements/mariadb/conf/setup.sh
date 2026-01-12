@@ -3,7 +3,7 @@ set -e
 
 INIT_FLAG="/var/lib/mysql/.initialized"
 
-echo "MariaDB entrypoint running. Unfortunately."
+echo "MariaDB entrypoint running. Still."
 
 mkdir -p /var/run/mysqld
 chown -R mysql:mysql /var/run/mysqld
@@ -12,7 +12,6 @@ chown -R mysql:mysql /var/lib/mysql
 if [ ! -f "$INIT_FLAG" ]; then
 	echo "First container start. Performing full MariaDB initialization."
 
-	# Clean any broken Debian pre-init
 	rm -rf /var/lib/mysql/*
 
 	mysql_install_db \
@@ -20,7 +19,11 @@ if [ ! -f "$INIT_FLAG" ]; then
 		--datadir=/var/lib/mysql
 
 	echo "Starting MariaDB for initial configuration..."
-	mariadbd --datadir=/var/lib/mysql --skip-networking &
+
+	mariadbd \
+		--user=mysql \
+		--datadir=/var/lib/mysql \
+		--skip-networking &
 	pid="$!"
 
 	until mysqladmin ping --silent; do
@@ -50,4 +53,4 @@ else
 fi
 
 echo "Starting MariaDB normally."
-exec mariadbd --datadir=/var/lib/mysql
+exec mariadbd --user=mysql --datadir=/var/lib/mysql
