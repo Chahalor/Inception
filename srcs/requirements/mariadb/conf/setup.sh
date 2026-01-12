@@ -47,6 +47,8 @@ EOF
 
 	echo "[MariaDB] Arrêt bootstrap"
 	mysqladmin -u root -p"$MYSQL_ROOT_PASSWORD" shutdown
+else
+	echo "[DEBUG] no init needed"
 fi
 
 # =========================
