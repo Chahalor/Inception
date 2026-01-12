@@ -23,6 +23,7 @@ require_var "$MYSQL_ROOT_PASSWORD"
 mkdir -p "$DATADIR" "$RUN_DIR"
 chown -R mysql:mysql "$DATADIR" "$RUN_DIR"
 
+rm -rf "$DATADIR/mysql"	 # rm
 if [ ! -d "$DATADIR/mysql" ]; then
 	echo "[MariaDB] Initializing database"
 	mariadb-install-db --user=mysql --datadir="$DATADIR"
