@@ -29,9 +29,9 @@ services:
     depends_on:
       - mariadb
 
-  ngnix:
-    container_name: ngnix
-    build: ./requirements/ngnix
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
     networks:
       - inception
     ports:
