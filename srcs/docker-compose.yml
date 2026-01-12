@@ -1,5 +1,7 @@
 services:
   mariadb:
+    container_name: mariadb
+    hostname: mariadb
     build: ./requirements/mariadb
     volumes:
       - mariadb:/var/lib/mysql
@@ -7,6 +9,7 @@ services:
       - inception
 
   wordpress:
+    container_name: wordpress
     build: ./requirements/wordpress
     volumes:
       - wordpress:/var/www/html
@@ -18,6 +21,7 @@ services:
       - mariadb
 
   # ngnix:
+  #   container_name: ngnix
   #   build: ./requirements/ngnix
   #   networks:
   #     - inception
