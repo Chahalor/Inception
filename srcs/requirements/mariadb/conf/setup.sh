@@ -1,51 +1,45 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
-RUN_DIR="/run/mysqld"
-SOCKET="$RUN_DIR/mysqld.sock"
+echo "MariaDB entrypoint running. Again. Time is a flat circle."
 
-require_var() {
-	if [ -z "$2" ]; then
-		echo "[MariaDB] Error: $1 is not set"
-		exit 1
+# Ensure runtime directories exist
+mkdir -p /var/run/mysqld
+chown -R mysql:mysql /var/run/mysqld
+chown -R mysql:mysql /var/lib/mysql
+
+# First-time initialization only
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+	echo "Fresh database detected. Initializing MariaDB..."
+
+	mysql_install_db \
+		--user=mysql \
+		--datadir=/var/lib/mysql
+
+	echo "Starting MariaDB temporarily for initial setup..."
+	mysqld_safe --datadir=/var/lib/mysql &
+	pid="$!"
+
+	# Wait until MariaDB is ready
+	until mysqladmin ping --silent; do
+		sleep 1
+	done
+
+	if [ -n "$MYSQL_ROOT_PASSWORD" ]; then
+		echo "Setting root password..."
+		mysql -u root <<-EOSQL
+			ALTER USER 'root'@'localhost'
+			IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+			FLUSH PRIVILEGES;
+EOSQL
 	fi
-	echo "[MariaDB] $1 is set"
-}
 
-require_var MYSQL_DATABASE "$MYSQL_DATABASE"
-require_var MYSQL_USER "$MYSQL_USER"
-require_var MYSQL_PASSWORD "$MYSQL_PASSWORD"
+	echo "Initial MariaDB setup complete. Shutting down temp server..."
+	mysqladmin shutdown
+	wait "$pid"
+else
+	echo "Existing database detected. Skipping initialization."
+fi
 
-mkdir -p "$RUN_DIR"
-chown -R mysql:mysql "$RUN_DIR"
-
-echo "[MariaDB] Starting temporary server"
-mysqld_safe --skip-networking --socket="$SOCKET" &
-
-# attendre le socket
-until mysqladmin --protocol=socket --socket="$SOCKET" ping >/dev/null 2>&1; do
-	sleep 1
-done
-
-echo "[MariaDB] Configuring database"
-
-mysql \
-	--protocol=socket \
-	--socket="$SOCKET" \
-	-u root <<-SQL
-	CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
-	CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-	GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
-	FLUSH PRIVILEGES;
-SQL
-
-mysqladmin \
-	--protocol=socket \
-	--socket="$SOCKET" \
-	-u root shutdown
-
-echo "[MariaDB] Starting final server"
-exec mysqld \
-	--user=mysql \
-	--bind-address=0.0.0.0 \
-	--console
+echo "Starting MariaDB normally..."
+exec mysqld_safe --datadir=/var/lib/mysql
