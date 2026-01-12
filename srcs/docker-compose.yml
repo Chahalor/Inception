@@ -38,3 +38,9 @@ volumes:
 networks:
   inception:
     driver: bridge
+
+healthcheck:
+  test: ["CMD-SHELL", "mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD || exit 1"]
+  interval: 10s
+  timeout: 5s
+  retries: 5
