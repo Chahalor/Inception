@@ -5,9 +5,8 @@ set -e
 WP_DIR="/var/www/html"
 
 echo "[WordPress] Waiting for MariaDB..."
-echo "[DEBUG] while ! mysqladmin ping -h mariadb -u\"$MYSQL_USER\" -p\"$MYSQL_PASSWORD\" --silent; do"	# rm
+# echo "[DEBUG] while ! mysqladmin ping -h mariadb -u\"$MYSQL_USER\" -p\"$MYSQL_PASSWORD\" --silent; do"	# rm
 
-echo "[WordPress] Waiting for MariaDB..."
 
 while ! mysqladmin ping \
 	-h "DB_HOST" \
