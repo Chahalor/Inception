@@ -21,7 +21,7 @@ chown -R mysql:mysql "$DATADIR"
 # Init DB si nécessaire
 # =========================
 ls -la /var/lib/mysql	# rm
-rm -rf /run/mysqld/mysqld	# rm
+rm -rf /run/mysqld/mysql	# rm
 if [ ! -d "$DATADIR/mysql" ]; then
 	echo "[MariaDB] Initialisation du data directory"
 
