@@ -29,13 +29,13 @@ services:
     depends_on:
       - mariadb
 
-  # ngnix:
-  #   container_name: ngnix
-  #   build: ./requirements/ngnix
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "433:433"
+  ngnix:
+    container_name: ngnix
+    build: ./requirements/ngnix
+    networks:
+      - inception
+    ports:
+      - "433:433"
 
 
 volumes:
