@@ -10,8 +10,8 @@ echo "[WordPress] Waiting for MariaDB..."
 
 while ! mysqladmin ping \
 	-h "DB_HOST" \
-	-u"$WORDPRESS_DB_USER" \
-	-p"$WORDPRESS_DB_PASSWORD"; do
+	-u"$WP_USER" \
+	-p"$WP_USER_PASSWORD"; do
 	# --silent; do
 	sleep 1
 done
