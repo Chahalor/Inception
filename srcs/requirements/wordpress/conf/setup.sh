@@ -7,8 +7,8 @@ WP_DIR="/var/www/html"
 echo "[WordPress] Waiting for MariaDB..."
 while ! mysqladmin ping \
 	-h "$DB_HOST" \
-	-u"$WP_USER" \
-	-p"$WP_USER_PASSWORD" \
+	-u"$DB_USER" \
+	-p"$DB_PASSWORD" \
 	--silent; do
 	sleep 1
 done
