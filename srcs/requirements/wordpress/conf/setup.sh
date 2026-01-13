@@ -43,15 +43,34 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	else
 		echo "[WordPress] User $WP_USER already exists"
 	fi
+
+	
 fi
 
 chown -R www-data:www-data "$WP_DIR"
 
 echo "[WordPress] Configuring PHP-FPM to listen on TCP"
 
-sed -i 's|^listen = .*|listen = 9000|' /etc/php/8.2/fpm/pool.d/www.conf
+FPM_CONF="/etc/php/8.2/fpm/pool.d/www.conf"
+
+mkdir -p /run/php
+
+sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' "$FPM_CONF"
 sed -i 's|^;*listen.allowed_clients =.*|listen.allowed_clients = 0.0.0.0|' \
-	/etc/php/8.2/fpm/pool.d/www.conf
+	"$FPM_CONF"
+
+if grep -q '^;*clear_env' "$FPM_CONF"; then
+	sed -i 's|^;*clear_env = .*|clear_env = no|' "$FPM_CONF"
+else
+	echo "clear_env = no" >> "$FPM_CONF"
+fi
+
+for key in DB_HOST DB_NAME DB_USER DB_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD; do
+	val=$(printenv "$key" || true)
+	if [ -n "$val" ] && ! grep -q "^env\\[$key\\]" "$FPM_CONF"; then
+		echo "env[$key] = $val" >> "$FPM_CONF"
+	fi
+done
 
 echo "[WordPress] Starting PHP-FPM"
 exec php-fpm8.2 -F

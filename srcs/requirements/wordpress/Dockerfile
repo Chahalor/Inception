@@ -12,7 +12,7 @@ RUN apt update && apt install -y \
 								&& rm -rf /var/lib/apt/lists/*
 
 COPY conf/setup.sh /setup.sh
-# COPY conf/wp-config.php /wp-config.php
+COPY conf/wp-config.php /wp-config.php
 
 RUN chmod +x /setup.sh
 
