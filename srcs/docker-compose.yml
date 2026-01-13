@@ -9,6 +9,7 @@ services:
       - inception
     env_file:
       - .env
+    restart: always
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD || exit 1"]
       interval: 10s
@@ -28,6 +29,7 @@ services:
     #   - "8080:9000"
     depends_on:
       - mariadb
+    restart: always
 
   nginx:
     container_name: nginx
@@ -40,6 +42,7 @@ services:
       - /home/nduvoid/data/wordpress:/var/www/html
     depends_on:
       - wordpress
+    restart: always
 
 # volumes:
 #   mariadb:
