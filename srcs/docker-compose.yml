@@ -1,6 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
+    image: mariadb
     hostname: mariadb
     build: ./requirements/mariadb
     volumes:
@@ -18,6 +19,7 @@ services:
 
   wordpress:
     container_name: wordpress
+    image: wordpress
     build: ./requirements/wordpress
     volumes:
       - /home/nduvoid/data/wordpress:/var/www/html
@@ -25,14 +27,13 @@ services:
       - .env
     networks:
       - inception
-    # ports:
-    #   - "8080:9000"
     depends_on:
       - mariadb
     restart: always
 
   nginx:
     container_name: nginx
+    image: nginx
     build: ./requirements/nginx
     networks:
       - inception
@@ -43,10 +44,6 @@ services:
     depends_on:
       - wordpress
     restart: always
-
-# volumes:
-#   mariadb:
-#   wordpress:
 
 networks:
   inception:
