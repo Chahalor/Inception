@@ -24,5 +24,11 @@ fi
 
 chown -R www-data:www-data "$WP_DIR"
 
+echo "[WordPress] Configuring PHP-FPM to listen on TCP"
+
+sed -i 's|^listen = .*|listen = 9000|' /etc/php/8.2/fpm/pool.d/www.conf
+sed -i 's|^;*listen.allowed_clients =.*|listen.allowed_clients = 0.0.0.0|' \
+	/etc/php/8.2/fpm/pool.d/www.conf
+
 echo "[WordPress] Starting PHP-FPM"
 exec php-fpm8.2 -F
