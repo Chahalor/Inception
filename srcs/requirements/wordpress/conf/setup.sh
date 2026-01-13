@@ -18,8 +18,12 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	echo "[WordPress] Installing WordPress"
 
 	curl -s https://wordpress.org/latest.tar.gz | tar xz --strip 1 -C "$WP_DIR"
-
 	cp /wp-config.php "$WP_DIR/wp-config.php"
+
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	chmod +x wp-cli.phar
+	mv wp-cli.phar /usr/local/bin/wp
+
 fi
 
 chown -R www-data:www-data "$WP_DIR"
