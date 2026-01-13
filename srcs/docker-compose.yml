@@ -2,10 +2,9 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb
-    hostname: mariadb
     build: ./requirements/mariadb
     volumes:
-      - /home/nduvoid/data/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - inception
     env_file:
@@ -22,7 +21,7 @@ services:
     image: wordpress
     build: ./requirements/wordpress
     volumes:
-      - /home/nduvoid/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     env_file:
       - .env
     networks:
@@ -35,12 +34,12 @@ services:
     container_name: nginx
     image: nginx
     build: ./requirements/nginx
+    volumes:
+      - wordpress_data:/var/www/html
     networks:
       - inception
     ports:
       - "443:443"
-    volumes:
-      - /home/nduvoid/data/wordpress:/var/www/html
     depends_on:
       - wordpress
     restart: always
@@ -49,3 +48,7 @@ networks:
   inception:
     driver: bridge
     name: inception
+
+volumes:
+  mariadb_data:
+  wordpress_data:

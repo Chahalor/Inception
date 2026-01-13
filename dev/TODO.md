@@ -1,6 +1,7 @@
 # Inception: TODO
 
 - [ ] remove the `.gitignore` file from the 42 git
+- [ ] move the volume from `bind mount` to `named mount`
 
 ## mariadb
 ## wordpress
