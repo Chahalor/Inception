@@ -4,7 +4,7 @@ services:
     hostname: mariadb
     build: ./requirements/mariadb
     volumes:
-      - mariadb:/var/lib/mysql
+      - /home/nduvoid/data/mariadb:/var/lib/mysql
     networks:
       - inception
     env_file:
@@ -19,7 +19,7 @@ services:
     container_name: wordpress
     build: ./requirements/wordpress
     volumes:
-      - wordpress:/var/www/html
+      - /home/nduvoid/data/wordpress:/var/www/html
     env_file:
       - .env
     networks:
@@ -38,9 +38,9 @@ services:
       - "443:443"
 
 
-volumes:
-  mariadb:
-  wordpress:
+# volumes:
+#   mariadb:
+#   wordpress:
 
 networks:
   inception:
