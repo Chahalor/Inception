@@ -24,6 +24,27 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 
+	echo "[WordPress] Installing core (if needed)"
+	wp core install \
+		--url="https://localhost" \
+		--title="Inception" \
+		--admin_user="$WP_ADMIN_USER" \
+		--admin_password="$WP_ADMIN_PASSWORD" \
+		--admin_email="$WP_ADMIN_EMAIL" \
+		--skip-email \
+		--allow-root || true
+
+	if ! wp user get "$WP_USER" --allow-root >/dev/null 2>&1; then
+	echo "[WordPress] Creating additional user"
+	wp user create "$WP_USER" "$WP_USER_EMAIL" \
+		--user_pass="$WP_USER_PASSWORD" \
+		--role=author \
+		--allow-root
+	else
+	echo "[WordPress] User $WP_USER already exists"
+	fi
+
+
 fi
 
 chown -R www-data:www-data "$WP_DIR"
