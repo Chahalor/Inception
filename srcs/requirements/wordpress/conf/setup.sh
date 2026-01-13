@@ -74,5 +74,23 @@ for key in DB_HOST DB_NAME DB_USER DB_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_P
 	fi
 done
 
+if grep -q '^;*catch_workers_output' "$FPM_CONF"; then
+	sed -i 's|^;*catch_workers_output.*|catch_workers_output = yes|' "$FPM_CONF"
+else
+	echo "catch_workers_output = yes" >> "$FPM_CONF"
+fi
+
+if grep -q '^;*php_admin_flag\\[log_errors\\]' "$FPM_CONF"; then
+	sed -i 's|^;*php_admin_flag\\[log_errors\\].*|php_admin_flag[log_errors] = on|' "$FPM_CONF"
+else
+	echo "php_admin_flag[log_errors] = on" >> "$FPM_CONF"
+fi
+
+if grep -q '^;*php_admin_value\\[error_log\\]' "$FPM_CONF"; then
+	sed -i 's|^;*php_admin_value\\[error_log\\].*|php_admin_value[error_log] = /proc/self/fd/2|' "$FPM_CONF"
+else
+	echo "php_admin_value[error_log] = /proc/self/fd/2" >> "$FPM_CONF"
+fi
+
 echo "[WordPress] Starting PHP-FPM"
 exec php-fpm8.2 -F
