@@ -41,10 +41,8 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 		--role=author \
 		--allow-root
 	else
-	echo "[WordPress] User $WP_USER already exists"
+		echo "[WordPress] User $WP_USER already exists"
 	fi
-
-
 fi
 
 chown -R www-data:www-data "$WP_DIR"
