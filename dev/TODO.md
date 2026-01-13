@@ -1,5 +1,7 @@
 # Inception: TODO
 
+- [ ] remove the `.gitignore` file from the 42 git
+
 ## mariadb
 ## wordpress
 ## nginx
