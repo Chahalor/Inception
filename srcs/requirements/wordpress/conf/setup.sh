@@ -58,8 +58,8 @@ FPM_CONF="/etc/php/8.2/fpm/pool.d/www.conf"
 mkdir -p /run/php
 
 sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' "$FPM_CONF"
-sed -i 's|^;*listen.allowed_clients =.*|listen.allowed_clients = 0.0.0.0|' \
-	"$FPM_CONF"
+# Allow all clients by removing listen.allowed_clients (defaults to any).
+sed -i '/^;*listen.allowed_clients =/d' "$FPM_CONF"
 
 if grep -q '^;*clear_env' "$FPM_CONF"; then
 	sed -i 's|^;*clear_env = .*|clear_env = no|' "$FPM_CONF"
