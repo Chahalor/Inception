@@ -38,6 +38,8 @@ services:
       - "443:443"
     volumes:
       - /home/nduvoid/data/wordpress:/var/www/html
+    depends_on:
+      - wordpress
 
 # volumes:
 #   mariadb:
