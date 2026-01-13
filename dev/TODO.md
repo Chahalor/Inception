@@ -15,3 +15,35 @@
 - [ ] rule to restart
 - [ ] rule to start
 - [ ] rule to clean the docker
+
+```
+Importer ton certificat dans Firefox (propre)
+
+Si tu veux arrêter les alertes comme un adulte responsable.
+
+1. Récupère ton certificat
+
+Depuis ton host ou ton conteneur nginx, par exemple :
+
+server.crt
+
+2. Firefox → paramètres
+
+Paramètres
+
+Vie privée et sécurité
+
+Tout en bas → Certificats
+
+Afficher les certificats
+
+Onglet Autorités
+
+Importer
+
+Sélectionne ton .crt
+
+Coche Faire confiance pour identifier des sites web
+
+Firefox respire. Toi aussi.
+```
