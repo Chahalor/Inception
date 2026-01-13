@@ -54,12 +54,26 @@ chown -R www-data:www-data "$WP_DIR"
 echo "[WordPress] Configuring PHP-FPM to listen on TCP"
 
 FPM_CONF="/etc/php/8.2/fpm/pool.d/www.conf"
+FPM_GLOBAL_CONF="/etc/php/8.2/fpm/php-fpm.conf"
 
 mkdir -p /run/php
 
 sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' "$FPM_CONF"
 # Allow all clients by removing listen.allowed_clients (defaults to any).
 sed -i '/^;*listen.allowed_clients =/d' "$FPM_CONF"
+
+if grep -q '^;*error_log' "$FPM_GLOBAL_CONF"; then
+	sed -i 's|^;*error_log = .*|error_log = /proc/self/fd/2|' \
+		"$FPM_GLOBAL_CONF"
+else
+	echo "error_log = /proc/self/fd/2" >> "$FPM_GLOBAL_CONF"
+fi
+
+if grep -q '^;*log_level' "$FPM_GLOBAL_CONF"; then
+	sed -i 's|^;*log_level = .*|log_level = notice|' "$FPM_GLOBAL_CONF"
+else
+	echo "log_level = notice" >> "$FPM_GLOBAL_CONF"
+fi
 
 if grep -q '^;*clear_env' "$FPM_CONF"; then
 	sed -i 's|^;*clear_env = .*|clear_env = no|' "$FPM_CONF"
