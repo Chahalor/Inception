@@ -23,6 +23,7 @@ make build	# will build all docker images
 make up		# will launch the project
 ```
 
+## Stoping
 ```bash
 make down	# shut down the docker compose
 make clean	# will clean the images
