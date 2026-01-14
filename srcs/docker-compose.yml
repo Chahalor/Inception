@@ -64,7 +64,7 @@ services:
     networks:
       - inception
     volumes:
-      - wordpress_data
+      - wordpress_data:/var/www/html
     ports:
         - "21:21"
         - "21000-21010:21000-21010"
