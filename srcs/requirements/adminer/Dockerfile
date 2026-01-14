@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /var/www/html
 
-RUN wget https://www.adminer.org/latest.php -O adminer.php
+RUN wget https://www.adminer.org/latest.php -O index.php \
+	&& rm -f index.html
 
 EXPOSE 8080
 
