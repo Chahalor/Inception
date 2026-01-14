@@ -55,8 +55,8 @@ services:
       - inception
 
   ftp:
-    container_name: FTP
-    image: FTP
+    container_name: ftp
+    image: ftp
     build: requirements/ftp
     restart: unless-stopped
     depends_on:
