@@ -14,7 +14,7 @@ RUN mkdir -p /var/www/html && \
 	chown -R ftpuser:ftpuser /var/www/html
 
 # Copy vsftpd configuration
-COPY vsftpd.conf /etc/vsftpd.conf
+COPY conf/vsftpd.conf /etc/vsftpd.conf
 
 EXPOSE 21 21000-21010
 
