@@ -2,6 +2,8 @@
 
 - [X] remove the `.gitignore` file from the 42 git
 - [X] move the volume from `bind mount` to `named mount`
+- [ ] fix `ftp` permissions
+- [ ] search if `ftp` has to go though `nginx`
 
 ## mariadb
 ## wordpress
@@ -11,7 +13,7 @@
 - [X] `README.md`
 - [X] `DEV_DOC.md`
 - [X] `USER_DOC.md`
-- [ ] update all docs to be in date with adminer
+- [X] update all docs to be in date with adminer
 
 ### makefile
 - [X] rule to setup the VM to be ready to install the project
