@@ -48,6 +48,8 @@ services:
     container_name: adminer
     image: adminer
     build: requirements/adminer
+    ports:
+      - "8080:8080"
     restart: unless-stopped
     depends_on:
       - mariadb
@@ -74,4 +76,3 @@ volumes:
       type: none
       o: bind
       device: /home/nduvoid/data/wordpress
-
