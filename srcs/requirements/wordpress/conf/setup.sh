@@ -4,7 +4,7 @@ set -e
 
 WP_DIR="/var/www/html"
 
-echo "[WordPress] Waiting for MariaDB..."
+echo "Waiting for MariaDB..."
 while ! mysqladmin ping \
 	-h "$DB_HOST" \
 	-u"$DB_USER" \
@@ -12,10 +12,10 @@ while ! mysqladmin ping \
 	--silent; do
 	sleep 1
 done
-echo "[WordPress] MariaDB is up"
+echo "MariaDB is up"
 
 if [ ! -f "$WP_DIR/wp-config.php" ]; then
-	echo "[WordPress] Installing WordPress"
+	echo "Installing WordPress"
 
 	curl -s https://wordpress.org/latest.tar.gz | tar xz --strip 1 -C "$WP_DIR"
 	cp /wp-config.php "$WP_DIR/wp-config.php"
@@ -24,7 +24,7 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 
-	echo "[WordPress] Installing core (if needed)"
+	echo "Installing core"
 	wp core install \
 		--url="https://localhost" \
 		--title="Inception" \
@@ -35,13 +35,13 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 		--allow-root || true
 
 	if ! wp user get "$WP_USER" --allow-root >/dev/null 2>&1; then
-	echo "[WordPress] Creating additional user"
-	wp user create "$WP_USER" "$WP_USER_EMAIL" \
-		--user_pass="$WP_USER_PASSWORD" \
-		--role=author \
-		--allow-root
+		echo "Creating additional user"
+		wp user create "$WP_USER" "$WP_USER_EMAIL" \
+			--user_pass="$WP_USER_PASSWORD" \
+			--role=author \
+			--allow-root
 	else
-		echo "[WordPress] User $WP_USER already exists"
+		echo "User $WP_USER already exists"
 	fi
 
 	chown -R www-data:www-data /var/www/html
@@ -51,7 +51,7 @@ fi
 
 chown -R www-data:www-data "$WP_DIR"
 
-echo "[WordPress] Configuring PHP-FPM to listen on TCP"
+echo "Configuring PHP-FPM to listen on TCP"
 
 FPM_CONF="/etc/php/8.2/fpm/pool.d/www.conf"
 FPM_GLOBAL_CONF="/etc/php/8.2/fpm/php-fpm.conf"
@@ -59,7 +59,6 @@ FPM_GLOBAL_CONF="/etc/php/8.2/fpm/php-fpm.conf"
 mkdir -p /run/php
 
 sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' "$FPM_CONF"
-# Allow all clients by removing listen.allowed_clients (defaults to any).
 sed -i '/^;*listen.allowed_clients =/d' "$FPM_CONF"
 
 if grep -q '^;*error_log' "$FPM_GLOBAL_CONF"; then
@@ -106,5 +105,5 @@ else
 	echo "php_admin_value[error_log] = /proc/self/fd/2" >> "$FPM_CONF"
 fi
 
-echo "[WordPress] Starting PHP-FPM"
+echo "Starting PHP-FPM"
 exec php-fpm8.2 -F

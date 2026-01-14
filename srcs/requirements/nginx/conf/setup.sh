@@ -1,9 +1,8 @@
 #!/bin/bash
 set -e
 
-echo "Starting nginx. Trying not to overthink it."
+echo "Starting nginx."
 
-# Ensure runtime directories exist
 mkdir -p /run/nginx
 mkdir -p /var/www/html
 mkdir -p /etc/nginx/ssl
@@ -16,11 +15,9 @@ openssl req -x509 -nodes -days 365 \
 	-addext "subjectAltName=DNS:nduvoid.42.fr"
 
 
-# Optional: permissions if you mount volumes
 chown -R www-data:www-data /var/www/html
 
-# Test config before starting (this saves lives)
 nginx -t
 
-# Start nginx in foreground (Docker requirement)
+echo "Ngnix setup finished"
 exec nginx -g "daemon off;"
