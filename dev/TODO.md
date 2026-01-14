@@ -1,22 +1,23 @@
 # Inception: TODO
 
-- [ ] remove the `.gitignore` file from the 42 git
-- [ ] move the volume from `bind mount` to `named mount`
+- [X] remove the `.gitignore` file from the 42 git
+- [X] move the volume from `bind mount` to `named mount`
 
 ## mariadb
 ## wordpress
 ## nginx
 
 ## Others
-- [ ] `README.md`
-- [ ] `DEV_DOC.md`
-- [ ] `USER_DOC.md`
+- [X] `README.md`
+- [X] `DEV_DOC.md`
+- [X] `USER_DOC.md`
+- [ ] update all docs to be in date with adminer
 
 ### makefile
-- [ ] rule to setup the VM to be ready to install the project
-- [ ] rule to build the `Inception` docker compose
+- [X] rule to setup the VM to be ready to install the project
+- [X] rule to build the `Inception` docker compose
 - [ ] rule to restart
-- [ ] rule to start
+- [X] rule to start
 - [ ] rule to clean the docker
 
 ```
