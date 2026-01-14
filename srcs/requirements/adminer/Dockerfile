@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /var/www/html
 
 RUN wget https://www.adminer.org/latest.php -O index.php \
-	&& rm -f index.html
+		&& rm -f index.html adminer.php
+
 
 EXPOSE 8080
 
