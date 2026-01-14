@@ -47,6 +47,7 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 	chown -R www-data:www-data /var/www/html
 	chmod -R 755 /var/www/html
 
+	chown -R ftpuser:ftpuser /var/www/html
 fi
 
 chown -R www-data:www-data "$WP_DIR"
