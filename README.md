@@ -7,6 +7,7 @@ We has be given the task to create 3 service all connected to each other and mak
  * A container with `mariadb` for wordpress static data
  * A container with `nginx` for the server security
  * A container with `wordpress` for the website
+ * A container with `adminer` running on it
 
 # Instructions
 
@@ -35,6 +36,7 @@ make clean	# will clean the images
  * [Mariadb](https://mariadb.com/kb/en/documentation)
  * [NGINX](https://nginx.org/en/docs/)
  * [Wordpress](https://wordpress.org/documentation/)
+ * [adminer](https://www.adminer.org/en/)
 
 ## AI
 Mostly to get documentation or to have exemple for like dockerfile or config file
@@ -47,3 +49,11 @@ Mostly to get documentation or to have exemple for like dockerfile or config fil
 | Secrets vs Environment Variables	| Secrets are usually managed via Docker Secrets, Kubernetes Secrets, or external vaults. Env vars are easy but insecure if leaked.	| Secrets often stored in OS-level secret managers or config files. Env vars exist but are less central to the model. |
 | Docker Network vs Host Network	| Uses virtual networks (bridge, overlay). Containers communicate via internal DNS. Host network mode exists but reduces isolation.	| Uses virtual NICs bridged or NATed to the host. Networking is closer to physical machines. |
 | Docker Volumes vs Bind Mounts		| Volumes are managed by Docker, portable, safer, and preferred for persistent data.												| Storage is typically virtual disks attached to the VM. Managed at the hypervisor or OS level. |
+
+
+# Features	<!-- TODO:  -->
+
+## mariadb
+## nginx
+## wordpress
+## adminer

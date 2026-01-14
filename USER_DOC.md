@@ -1,7 +1,8 @@
 # Services
 
 this project contain multiple differents stacks.
-Such has `docker`, `mariadb`, `NGINX` and `wordpress`. 
+Such has `docker`, `mariadb`, `NGINX` and `wordpress`.
+For teh bonus container there is `adminer`
 
 # Management
 
@@ -20,3 +21,4 @@ cd srcs && docker compose ps
 
  * [Wordpress](nduvoid.42.fr)
  * [wp admin](nduvoid.42.fr/wp-admin)
+ * [Adminer](nduvoid.42.fr/adminer/)
