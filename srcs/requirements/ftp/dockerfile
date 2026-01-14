@@ -7,13 +7,18 @@ RUN apt-get update && apt-get install -y \
 
 # Create FTP user
 RUN useradd -m ftpuser && \
-	echo "ftpuser:ftppassword" | chpasswd
+	echo "ftpuser:ftpuser" | chpasswd
 
+# TODO: move the pwd to .env
 # Create directory that will map to WordPress volume
 RUN mkdir -p /var/www/html && \
 	chown -R ftpuser:ftpuser /var/www/html
+
 RUN mkdir -p /var/run/vsftpd/empty && \
 	chmod 755 /var/run/vsftpd/empty
+
+RUN usermod -aG www-data ftpuser
+
 
 # Copy vsftpd configuration
 COPY conf/vsftpd.conf /etc/vsftpd.conf
