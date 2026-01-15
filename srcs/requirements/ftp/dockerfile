@@ -6,11 +6,9 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Create FTP user
-RUN useradd -m ftpuser && \
-	echo "ftpuser:ftpuser" | chpasswd
+RUN useradd -m $FTP_USER && \
+	echo "$FTP_USER:$FTP_PWD" | chpasswd
 
-# TODO: move the pwd to .env
-# Create directory that will map to WordPress volume
 RUN mkdir -p /var/www/html && \
 	chmod 775 /var/www/html && \
 	chown -R www-data:www-data /var/www/html
