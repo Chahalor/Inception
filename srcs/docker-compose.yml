@@ -28,6 +28,7 @@ services:
       - inception
     depends_on:
       - mariadb
+      - redis
     restart: always
 
   nginx:
@@ -74,6 +75,14 @@ services:
         - "21000-21010:21000-21010"
     env_file:
       - .env
+
+  redis:
+    container_name: redis
+    image: redis
+    build: requirements/redis
+    networks:
+      - inception
+    restart: always
 
 networks:
   inception:

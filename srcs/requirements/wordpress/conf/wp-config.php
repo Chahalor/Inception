@@ -11,6 +11,9 @@ define('DB_COLLATE', '');
 define('WP_HOME', 'https://nduvoid.42.fr');
 define('WP_SITEURL', 'https://nduvoid.42.fr');
 
+define('WP_REDIS_HOST', 'redis');
+define('WP_REDIS_PORT', 6379);
+
 $table_prefix = 'wp_';
 
 define('WP_DEBUG', false);
