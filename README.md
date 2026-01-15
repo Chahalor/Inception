@@ -56,12 +56,39 @@ Mostly to get documentation or to have exemple for like dockerfile or config fil
 | Docker Volumes vs Bind Mounts		| Volumes are managed by Docker, portable, safer, and preferred for persistent data.												| Storage is typically virtual disks attached to the VM. Managed at the hypervisor or OS level. |
 
 
-# Features	<!-- TODO:  -->
+# Features
+Each service has a focused job and communicates over the private `inception`
+network.
 
 ## mariadb
+- Persistent database for WordPress; data is stored in `mariadb_data`.
+- First boot initializes users and the database from `.env` (`MYSQL_*` vars).
+- Exposes 3306 inside the compose network and includes a healthcheck.
+
 ## nginx
+- Terminates TLS and serves the WordPress files over HTTPS (host port 443).
+- Self-signed cert is generated at container start for `nduvoid.42.fr`.
+- Proxies PHP requests to `wordpress:9000` and `/adminer/` to `adminer:8080`.
+
 ## wordpress
+- PHP-FPM 8.2 container that installs WordPress on first run via WP-CLI.
+- Creates admin/user accounts from `.env` (`WP_*` vars) and enables Redis cache.
+- Content lives in `wordpress_data` so files persist across restarts.
+
 ## adminer
+- Lightweight DB UI served on 8080 inside the network.
+- Exposed to the host through nginx at `https://<host>/adminer/`.
+
 ## FTP
+- `vsftpd` server for uploading/downloading site files.
+- Uses the WordPress volume as the FTP root and exposes ports 21 + 21000-21010.
+- User is created at build time from `FTP_USER` (password defaults to the same).
+
 ## Redis
+- In-memory cache used by WordPress (Redis Object Cache plugin).
+- Configured with `maxmemory 256mb` and `allkeys-lru` eviction policy.
+
 ## Watchtower
+- Minimal update loop that checks every 5 minutes for image updates.
+- Only updates containers labeled `watchtower.enable=true`.
+- Requires the Docker socket to inspect/pull/recreate containers.
