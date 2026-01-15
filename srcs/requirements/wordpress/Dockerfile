@@ -7,12 +7,10 @@ RUN apt update && apt install -y \
 								php-xml \
 								php-mbstring \
 								php-zip \
+								php-redis \
 								curl \
 								mariadb-client \
 								&& rm -rf /var/lib/apt/lists/*
-
-RUN pecl install redis \
-		&& docker-php-ext-enable redis
 
 
 COPY conf/setup.sh /setup.sh
