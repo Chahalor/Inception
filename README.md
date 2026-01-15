@@ -41,6 +41,7 @@ make clean	# will clean the images
  * [adminer](https://www.adminer.org/en/)
  * [FTP](https://www.rfc-editor.org/rfc/rfc959)
  * [redis cache](https://redis.io/docs/latest/)
+* [watchtower](https://containrrr.dev/watchtower/)
 
 ## AI
 Mostly to get documentation or to have exemple for like dockerfile or config file
@@ -63,3 +64,4 @@ Mostly to get documentation or to have exemple for like dockerfile or config fil
 ## adminer
 ## FTP
 ## Redis
+## Watchtower
