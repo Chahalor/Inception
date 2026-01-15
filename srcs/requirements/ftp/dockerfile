@@ -5,10 +5,13 @@ RUN apt-get update && apt-get install -y \
 	ftp \
 	&& rm -rf /var/lib/apt/lists/*
 
+ARG FTP_USER
+ARG FTP_PWD
 # Create FTP user
-# RUN useradd -m $FTP_USER && \
-# 	echo "$FTP_USER:$FTP_PWD" | chpasswd
+RUN useradd -m $FTP_USER && \
+	echo "$FTP_USER:$FTP_USER" | chpasswd
 
+# TODO: move the pwd to .env
 RUN mkdir -p /var/www/html && \
 	chmod 775 /var/www/html && \
 	chown -R www-data:www-data /var/www/html

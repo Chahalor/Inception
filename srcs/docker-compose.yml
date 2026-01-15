@@ -57,7 +57,11 @@ services:
   ftp:
     container_name: ftp
     image: ftp
-    build: requirements/ftp
+    build:
+      context: requirements/ftp
+      args:
+        - FTP_USER=${FTP_USER}
+        - FTP_PWD=${FTP_PWD}
     restart: unless-stopped
     depends_on:
       - wordpress

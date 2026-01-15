@@ -8,7 +8,4 @@ mkdir -p "$WWW_DIR"
 chown -R www-data:www-data "$WWW_DIR"
 chmod -R 775 "$WWW_DIR"
 
-useradd -m $FTP_USER && \
-	echo "$FTP_USER:$FTP_PWD" | chpasswd
-
 exec vsftpd /etc/vsftpd.conf
