@@ -44,6 +44,14 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
 		echo "User $WP_USER already exists"
 	fi
 
+	if ! wp plugin is-installed redis-cache --allow-root >/dev/null 2>&1; then
+		echo "Installing Redis Object Cache plugin"
+		wp plugin install redis-cache --activate --allow-root
+		wp redis enable --allow-root || true
+	else
+		echo "Redis Object Cache plugin already installed"
+	fi
+
 	chown -R www-data:www-data /var/www/html
 	chmod -R 755 /var/www/html
 
