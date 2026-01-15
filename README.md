@@ -9,6 +9,7 @@ We has be given the task to create 3 service all connected to each other and mak
  * A container with `wordpress` for the website
  * A container with `adminer` running on it
  * A container with `FPT` running in the localhost
+ * A container with `redis cache` for the wordpress page caching
 
 # Instructions
 
@@ -39,6 +40,7 @@ make clean	# will clean the images
  * [Wordpress](https://wordpress.org/documentation/)
  * [adminer](https://www.adminer.org/en/)
  * [FTP](https://www.rfc-editor.org/rfc/rfc959)
+ * [redis cache](https://redis.io/docs/latest/)
 
 ## AI
 Mostly to get documentation or to have exemple for like dockerfile or config file
@@ -60,3 +62,4 @@ Mostly to get documentation or to have exemple for like dockerfile or config fil
 ## wordpress
 ## adminer
 ## FTP
+## Redis

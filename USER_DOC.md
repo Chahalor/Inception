@@ -2,7 +2,7 @@
 
 this project contain multiple differents stacks.
 Such has `docker`, `mariadb`, `NGINX` and `wordpress`.
-For teh bonus container there is `adminer`
+For the bonus container there is `adminer`
 
 # Management
 
