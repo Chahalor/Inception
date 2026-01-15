@@ -92,5 +92,12 @@ network.
 - Minimal update loop that checks every 5 minutes for image updates.
 - Only updates containers labeled `watchtower.enable=true`.
 - Requires the Docker socket to inspect/pull/recreate containers.
+
 ## Redis
+- In-memory cache used by WordPress (Redis Object Cache plugin).
+- Configured with `maxmemory 256mb` and `allkeys-lru` eviction policy.
+
 ## Watchtower
+- Minimal update loop that checks every 5 minutes for image updates.
+- Only updates containers labeled `watchtower.enable=true`.
+- Requires the Docker socket to inspect/pull/recreate containers.
