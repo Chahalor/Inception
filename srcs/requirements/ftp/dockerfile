@@ -12,6 +12,7 @@ RUN useradd -m ftpuser && \
 # TODO: move the pwd to .env
 # Create directory that will map to WordPress volume
 RUN mkdir -p /var/www/html && \
+	chmod 755 /var/www/htm && \
 	chown -R ftpuser:ftpuser /var/www/html
 
 RUN mkdir -p /var/run/vsftpd/empty && \
