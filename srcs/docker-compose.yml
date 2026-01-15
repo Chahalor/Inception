@@ -84,6 +84,18 @@ services:
       - inception
     restart: always
 
+  website:
+    container_name: website
+    image: website
+    build: requirements/website
+    networks:
+      - inception
+    volumes:
+      - wordpress_data
+    restart: always
+    depends_on:
+      - nginx
+
 networks:
   inception:
     driver: bridge
