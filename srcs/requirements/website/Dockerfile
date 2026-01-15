@@ -10,7 +10,7 @@ RUN rm /etc/nginx/sites-enabled/default
 
 RUN chown -R www-data:www-data /var/www/html
 
-RUN git clone https://github.com/Chahalor/Chahalor.github.io.git /var/www/html
+RUN git clone https://github.com/Chahalor/Chahalor.github.io.git /var/www/html/site
 
 EXPOSE 80
 
