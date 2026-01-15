@@ -5,7 +5,7 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY redis.conf /etc/redis/redis.conf
+COPY conf/redis.conf /etc/redis/redis.conf
 
 # Disable protected mode and keep Redis in the foreground for Docker
 # RUN sed -i 's/^protected-mode yes/protected-mode no/' /etc/redis/redis.conf \
