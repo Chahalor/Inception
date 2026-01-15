@@ -92,3 +92,5 @@ network.
 - Minimal update loop that checks every 5 minutes for image updates.
 - Only updates containers labeled `watchtower.enable=true`.
 - Requires the Docker socket to inspect/pull/recreate containers.
+## Redis
+## Watchtower
