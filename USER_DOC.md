@@ -22,3 +22,4 @@ cd srcs && docker compose ps
  * [Wordpress](nduvoid.42.fr)
  * [wp admin](nduvoid.42.fr/wp-admin)
  * [Adminer](nduvoid.42.fr/adminer/)
+ * FTP: use the `ftp` command on the host

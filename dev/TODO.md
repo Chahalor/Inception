@@ -2,8 +2,8 @@
 
 - [X] remove the `.gitignore` file from the 42 git
 - [X] move the volume from `bind mount` to `named mount`
-- [ ] fix `ftp` permissions
-- [ ] search if `ftp` has to go though `nginx`
+- [X] fix `ftp` permissions
+- [X] search if `ftp` has to go though `nginx`
 
 ## mariadb
 ## wordpress

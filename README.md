@@ -8,6 +8,7 @@ We has be given the task to create 3 service all connected to each other and mak
  * A container with `nginx` for the server security
  * A container with `wordpress` for the website
  * A container with `adminer` running on it
+ * A container with `FPT` running in the localhost
 
 # Instructions
 
@@ -37,6 +38,7 @@ make clean	# will clean the images
  * [NGINX](https://nginx.org/en/docs/)
  * [Wordpress](https://wordpress.org/documentation/)
  * [adminer](https://www.adminer.org/en/)
+ * [FTP](https://www.rfc-editor.org/rfc/rfc959)
 
 ## AI
 Mostly to get documentation or to have exemple for like dockerfile or config file
@@ -57,3 +59,4 @@ Mostly to get documentation or to have exemple for like dockerfile or config fil
 ## nginx
 ## wordpress
 ## adminer
+## FTP
