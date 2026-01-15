@@ -15,7 +15,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -30,7 +29,6 @@ services:
       - mariadb
       - redis
     restart: always
-
   nginx:
     container_name: nginx
     image: nginx
@@ -44,7 +42,6 @@ services:
     depends_on:
       - wordpress
     restart: always
-
   adminer:
     container_name: adminer
     image: adminer
@@ -54,7 +51,8 @@ services:
       - mariadb
     networks:
       - inception
-
+    labels:
+      - "watchtower.enable=true"
   ftp:
     container_name: ftp
     image: ftp
@@ -75,7 +73,6 @@ services:
         - "21000-21010:21000-21010"
     env_file:
       - .env
-
   redis:
     container_name: redis
     image: redis
@@ -83,6 +80,17 @@ services:
     networks:
       - inception
     restart: always
+    labels:
+      - "watchtower.enable=true"
+  watchtower:
+    container_name: watchtower
+    image: watchtower
+    build: requirements/watchtower
+    networks:
+      - inception
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
 
 networks:
   inception:
