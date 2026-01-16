@@ -8,11 +8,19 @@ RUN apt-get update && apt-get install -y \
     git \
     make \
     ca-certificates \
+    gcc \
+    libc6-dev \
+    libseccomp-dev \
+    libudev-dev \
+    pkg-config \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
 
 RUN git clone https://github.com/google/cadvisor.git .
+
+# cAdvisor NEEDS CGO
+ENV CGO_ENABLED=1
 
 RUN make build
 
