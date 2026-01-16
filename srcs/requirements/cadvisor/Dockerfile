@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
 	libseccomp-dev \
 	libudev-dev \
 	pkg-config \
-&& rm -rf /var/lib/apt/lists/*
+	libbtrfs-dev \
+	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
 RUN git clone https://github.com/google/cadvisor.git .
