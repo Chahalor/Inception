@@ -10,6 +10,8 @@ We has be given the task to create 3 service all connected to each other and mak
  * A container with `adminer` running on it
  * A container with `FPT` running in the localhost
  * A container with `redis cache` for the wordpress page caching
+ * A [static web page](nduvoid.42.fr/site) host with `nginx`
+ * A container with `cAdvisor` to manager containers
 
 # Instructions
 
@@ -41,7 +43,7 @@ make clean	# will clean the images
  * [adminer](https://www.adminer.org/en/)
  * [FTP](https://www.rfc-editor.org/rfc/rfc959)
  * [redis cache](https://redis.io/docs/latest/)
-* [watchtower](https://containrrr.dev/watchtower/)
+ * [cAdvisor](https://github.com/google/cadvisor/blob/master/docs/web.md)
 
 ## AI
 Mostly to get documentation or to have exemple for like dockerfile or config file
@@ -88,16 +90,5 @@ network.
 - In-memory cache used by WordPress (Redis Object Cache plugin).
 - Configured with `maxmemory 256mb` and `allkeys-lru` eviction policy.
 
-## Watchtower
-- Minimal update loop that checks every 5 minutes for image updates.
-- Only updates containers labeled `watchtower.enable=true`.
-- Requires the Docker socket to inspect/pull/recreate containers.
-
-## Redis
-- In-memory cache used by WordPress (Redis Object Cache plugin).
-- Configured with `maxmemory 256mb` and `allkeys-lru` eviction policy.
-
-## Watchtower
-- Minimal update loop that checks every 5 minutes for image updates.
-- Only updates containers labeled `watchtower.enable=true`.
-- Requires the Docker socket to inspect/pull/recreate containers.
+## cAdvisor
+- better visibility for docker specs

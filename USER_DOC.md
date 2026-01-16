@@ -23,3 +23,4 @@ cd srcs && docker compose ps
  * [wp admin](nduvoid.42.fr/wp-admin)
  * [Adminer](nduvoid.42.fr/adminer/)
  * FTP: use the `ftp` command on the host
+ * [cAdvisor](http://localhost:8081/)
