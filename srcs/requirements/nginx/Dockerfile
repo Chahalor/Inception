@@ -16,7 +16,5 @@ RUN mkdir -p /var/www/html
 
 RUN test -n "$GIT"
 
-RUN git clone --depth 1 "$GIT" /var/www/html/site
-
 EXPOSE 80 443
 ENTRYPOINT ["/setup.sh"]

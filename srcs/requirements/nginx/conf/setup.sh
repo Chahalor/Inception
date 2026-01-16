@@ -17,6 +17,9 @@ openssl req -x509 -nodes -days 365 \
 
 chown -R www-data:www-data /var/www/html
 
+git clone --depth 1 "$GIT" /var/www/html/site
+
+
 nginx -t
 
 echo "Ngnix setup finished"
