@@ -41,3 +41,13 @@ docker exec -it mariadb bash
 mysql -u root -p
 SHOW DATABASES;
 ```
+
+* check `ftp`:
+```
+ftp localhost
+<login>
+<pwd>
+put <file>
+get <file>
+...
+```
