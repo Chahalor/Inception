@@ -1,7 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb
+    # image: mariadb
     build: ./requirements/mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
@@ -17,7 +17,7 @@ services:
       retries: 5
   wordpress:
     container_name: wordpress
-    image: wordpress
+    # image: wordpress
     build: ./requirements/wordpress
     volumes:
       - wordpress_data:/var/www/html
@@ -31,7 +31,7 @@ services:
     restart: always
   nginx:
     container_name: nginx
-    image: nginx
+    # image: nginx
     build:
       context: ./requirements/nginx
       args:
@@ -51,7 +51,7 @@ services:
     restart: always
   adminer:
     container_name: adminer
-    image: adminer
+    # image: adminer
     build: requirements/adminer
     restart: unless-stopped
     depends_on:
@@ -60,7 +60,7 @@ services:
       - inception
   ftp:
     container_name: ftp
-    image: ftp
+    # image: ftp
     build:
       context: requirements/ftp
       args:
@@ -80,7 +80,7 @@ services:
       - .env
   redis:
     container_name: redis
-    image: redis
+    # image: redis
     build: requirements/redis
     networks:
       - inception
