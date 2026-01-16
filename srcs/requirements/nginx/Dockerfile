@@ -1,5 +1,7 @@
 FROM debian:12
 
+ARG GIT
+
 RUN apt update && apt install -y \
 	nginx \
 	openssl \
@@ -12,7 +14,7 @@ COPY site/ /var/www/html/site
 
 RUN chmod +x /setup.sh
 
-RUN git submodule update --recursive --remote
+RUN git clone ${GIT} /var/www/html/site
 
 EXPOSE 80 443
 
