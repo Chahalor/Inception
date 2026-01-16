@@ -12,17 +12,21 @@ RUN apt-get update && apt-get install -y \
 	libseccomp-dev \
 	libudev-dev \
 	pkg-config \
-	libbtrfs-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
+
 RUN git clone https://github.com/google/cadvisor.git .
+RUN git checkout v0.49.1
 
 ENV CGO_ENABLED=1
 ENV GO111MODULE=on
 
-RUN go build -o cadvisor ./cmd/cadvisor
-
+# IMPORTANT: build with tags expected by cadvisor
+RUN go build \
+	-tags "netgo osusergo" \
+	-o cadvisor \
+	./cmd/cadvisor
 # =========================
 # Stage 2: runtime
 # =========================
