@@ -90,8 +90,6 @@ services:
     container_name: cadvisor
     privileged: true
     restart: unless-stopped
-    # expose:
-    #   - "8080"
     ports:
       - "8081:8081"
     volumes:
@@ -101,9 +99,6 @@ services:
       - /var/lib/docker:/var/lib/docker:ro
     networks:
       - inception
-    # command:
-    #     - "--docker_only=true"
-    #     - "--disable_metrics=disk"
 
 
 networks:
