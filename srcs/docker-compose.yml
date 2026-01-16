@@ -52,8 +52,6 @@ services:
       - mariadb
     networks:
       - inception
-    labels:
-      - "watchtower.enable=true"
   ftp:
     container_name: ftp
     image: ftp
@@ -81,25 +79,7 @@ services:
     networks:
       - inception
     restart: always
-    labels:
-      - "watchtower.enable=true"
-  watchtower:
-    container_name: watchtower
-    image: watchtower
-    build: requirements/watchtower
-    networks:
-      - inception
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-# dummy service to test watchtower
-  # whoami:
-  #   image: traefik/whoami:latest
-  #   container_name: whoami
-  #   labels:
-  #     - "watchtower.enable=true"
-  #   networks:
-  #     - inception
 
 networks:
   inception:
