@@ -4,25 +4,23 @@
 FROM debian:bookworm AS builder
 
 RUN apt-get update && apt-get install -y \
-    golang \
-    git \
-    make \
-    ca-certificates \
-    gcc \
-    libc6-dev \
-    libseccomp-dev \
-    libudev-dev \
-    pkg-config \
- && rm -rf /var/lib/apt/lists/*
+	golang \
+	git \
+	ca-certificates \
+	gcc \
+	libc6-dev \
+	libseccomp-dev \
+	libudev-dev \
+	pkg-config \
+&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-
 RUN git clone https://github.com/google/cadvisor.git .
 
-# cAdvisor NEEDS CGO
 ENV CGO_ENABLED=1
+ENV GO111MODULE=on
 
-RUN make build
+RUN go build -o cadvisor ./cmd/cadvisor
 
 # =========================
 # Stage 2: runtime
@@ -30,8 +28,8 @@ RUN make build
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y \
-    ca-certificates \
- && rm -rf /var/lib/apt/lists/*
+	ca-certificates \
+&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /build/cadvisor /usr/bin/cadvisor
 
