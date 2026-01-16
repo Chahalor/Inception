@@ -99,9 +99,9 @@ services:
       - /var/lib/docker:/var/lib/docker:ro
     networks:
       - inception
-    command:
-        - "--docker_only=true"
-        - "--disable_metrics=disk"
+    # command:
+    #     - "--docker_only=true"
+    #     - "--disable_metrics=disk"
 
 
 networks:
