@@ -32,7 +32,10 @@ services:
   nginx:
     container_name: nginx
     image: nginx
-    build: ./requirements/nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        - GIT=${GIT_SITE}
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -42,8 +45,7 @@ services:
       - "80:80"
     depends_on:
       - wordpress
-    args:
-      - GIT=${GIT_SITE}
+
     restart: always
   adminer:
     container_name: adminer
