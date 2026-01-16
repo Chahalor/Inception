@@ -10,10 +10,10 @@ RUN apt update && apt install -y \
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/setup.sh /setup.sh
-COPY site/ /var/www/html/site
 
 RUN chmod +x /setup.sh
 
+# Clone static site from git
 RUN git clone ${GIT} /var/www/html/site
 
 EXPOSE 80 443

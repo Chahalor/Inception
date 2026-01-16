@@ -1,3 +1,0 @@
-[submodule "srcs/requirements/nginx/site"]
-	path = srcs/requirements/nginx/site
-	url = https://github.com/Chahalor/Chahalor.github.io.git
