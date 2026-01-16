@@ -42,6 +42,8 @@ services:
       - "80:80"
     depends_on:
       - wordpress
+    args:
+      - GIT=${GIT_SITE}
     restart: always
   adminer:
     container_name: adminer
