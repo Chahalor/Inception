@@ -5,6 +5,7 @@ echo "Starting nginx."
 
 mkdir -p /run/nginx
 mkdir -p /var/www/html
+mkdir -p /var/www/site
 mkdir -p /etc/nginx/ssl
 
 openssl req -x509 -nodes -days 365 \
@@ -17,7 +18,7 @@ openssl req -x509 -nodes -days 365 \
 
 chown -R www-data:www-data /var/www/html
 
-git clone --depth 1 "$GIT" /var/www/html/site
+git clone --depth 1 "$GIT" /var/www/site
 
 
 nginx -t
