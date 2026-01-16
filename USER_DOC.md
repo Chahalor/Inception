@@ -24,3 +24,20 @@ cd srcs && docker compose ps
  * [Adminer](nduvoid.42.fr/adminer/)
  * FTP: use the `ftp` command on the host
  * [cAdvisor](http://localhost:8081/)
+
+# Evaluation
+ * check `nginx` port:
+```bash
+curl -k http://nduvoid.42.fr # or https://nduvoid.42.fr # for success
+```
+ * TLS certificate: 
+```bash
+docker exec -it nginx cat /etc/nginx/ssl/nduvoid.crt
+```
+
+ * checking db:
+```bash
+docker exec -it mariadb bash
+mysql -u root -p
+SHOW DATABASES;
+```
