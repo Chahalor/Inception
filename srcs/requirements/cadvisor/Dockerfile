@@ -1,44 +1,21 @@
-# =========================
-# Stage 1: build
-# =========================
-FROM debian:bookworm AS builder
+# Import stable Debian base image (Bookworm)
+FROM debian:12
 
-RUN apt-get update && apt-get install -y \
-	golang \
-	git \
-	ca-certificates \
-	gcc \
-	libc6-dev \
-	libseccomp-dev \
-	libudev-dev \
-	pkg-config \
-	&& rm -rf /var/lib/apt/lists/*
+# Skip interactivity (timezone, etc)
+ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /build
-RUN mkdir -p /build/cmd/cadvisor
+# Install wget to download cAdvisor
+RUN apt-get update && \
+	apt-get install -y wget ca-certificates && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/google/cadvisor.git .
-RUN git checkout v0.49.1
+# Download cAdvisor binary (latest version with Docker API 1.44+ support)
+RUN wget https://github.com/google/cadvisor/releases/download/v0.50.0/cadvisor-v0.50.0-linux-amd64 -O /usr/local/bin/cadvisor && \
+	chmod +x /usr/local/bin/cadvisor
 
-ENV CGO_ENABLED=1
-ENV GO111MODULE=on
+# Expose port 8081
+EXPOSE 8081
 
-# IMPORTANT: build with tags expected by cadvisor
-RUN go build \
-	-tags "netgo osusergo" \
-	-o cadvisor \
-	./cmd/cadvisor
-# =========================
-# Stage 2: runtime
-# =========================
-FROM debian:bookworm-slim
-
-RUN apt-get update && apt-get install -y \
-	ca-certificates \
-&& rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /build/cadvisor /usr/bin/cadvisor
-
-EXPOSE 8080
-
-ENTRYPOINT ["/usr/bin/cadvisor"]
+# Start cAdvisor
+CMD ["/usr/local/bin/cadvisor", "-port=8081"]
