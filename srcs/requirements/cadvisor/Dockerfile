@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-RUN mkdir ./cmd/cadvisor
+RUN mkdir -p /build/cmd/cadvisor
 
 RUN git clone https://github.com/google/cadvisor.git .
 RUN git checkout v0.49.1
